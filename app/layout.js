@@ -11,20 +11,16 @@ import {
 } from "@/components/ui/resizable";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { Toaster } from "@/components/ui/sonner"
 import { MainSideBar } from "@/components/mainSideBar";
-
+import Providers from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <Providers>
           <ResizablePanelGroup
             autoSaveId="persistance"
             direction="horizontal"
@@ -34,7 +30,8 @@ export default function RootLayout({ children }) {
             <ResizableHandle withHandle />
             <ResizablePanel defaultSize={85}>{children}</ResizablePanel>
           </ResizablePanelGroup>
-        </ThemeProvider>
+        </Providers>
+        <Toaster />
       </body>
     </html>
   );

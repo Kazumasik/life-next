@@ -5,6 +5,8 @@ import { Controller, FormProvider, useFormContext } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Button } from "./button";
+import { Trash } from "lucide-react";
 const Form = FormProvider;
 
 const FormFieldContext = React.createContext({});
@@ -124,15 +126,19 @@ const FormMessage = React.forwardRef(
 );
 FormMessage.displayName = "FormMessage";
 
-const InputField = ({ label, name, control, ...props }) => (
+const InputField = ({ label, name, control, deleteble = false, onDelete, ...props }) => (
   <FormField
     control={control}
     name={name}
     render={({ field }) => (
-      <FormItem>
-        <FormLabel>{label}</FormLabel>
+      <FormItem >  
+        <div className="flex justify-between items-end">
+        <FormLabel className>{label}</FormLabel>
+        {deleteble && <Button type="button" onClick={onDelete} variant="outline" size="sm"><Trash size={15} /></Button>}
+        </div>
+
         <FormControl>
-          
+
           <Input {...field} {...props} />
         </FormControl>
         <FormMessage />
